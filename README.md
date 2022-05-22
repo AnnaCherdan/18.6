@@ -1,2 +1,3 @@
 # 18.6
-АnnCurrancyBot  @CurrancyBot
+Bot name - АnnCurrancyBot  
+Bot username - @CurrancyBot
