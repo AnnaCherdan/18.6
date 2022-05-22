@@ -17,22 +17,18 @@ class CriptoConverter:
         elif quote == base:
             raise APIException(f'конвертируемые валюты должны быть различны.'\
                                f' Я не могу перевести валюту в саму себя! /help')
-        elif quote not in keys:
-            raise APIException(f'данной валюты "{quote}" нет в списке доступных валют. Проверьте, пожалуйста,'\
-                               f' написание.  /values')
-        elif base not in keys:
-            raise APIException(f'данной валюты "{base}" нет в списке доступных валют. Проверьте, пожалуйста,'\
-                               f'написание. /values')
         else:
             ...
         try:
             quote_ticker = keys[quote]
         except KeyError:
-            raise APIException(f'вводить название "{quote}" надо с большой буквы, как в образце.')
+            raise APIException(f'данной валюты "{quote}" нет в списке доступных валют. Проверьте, пожалуйста,'\
+                               f' написание.  /values')
         try:
             base_ticker = keys[base]
         except KeyError:
-            raise APIException(f'вводить название "{base}" надо с большой буквы, как в образце.')
+            raise APIException(f'данной валюты "{base}" нет в списке доступных валют. Проверьте, пожалуйста,'\
+                               f'написание. /values')
         try:
             amount = float(amount)
             if amount <= 0:
