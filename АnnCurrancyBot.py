@@ -9,8 +9,8 @@ bot = telebot.TeleBot(TOKEN)
 def welcome(message: telebot.types.Message):
     text = f'Здравствуйте, {message.chat.first_name}, я сконвертирую интересующие вас валюты.' \
            f'\nДля этого прошу ввести через пробел:'\
-           f'\n<Из какой вылюты> <В какую валюту> <Количество>'\
-           f'\nОбразец: Рубль Рубль_Белоруссия 25'\
+           f'\n<из какой валюты> <в какую валюту> <количество>'\
+           f'\nОбразец: рубль рубль_Белоруссия 25'\
            f'\nНачать работу: /start'\
            f'\nПомощь: /help'\
            f'\nСписок доступных валют: /values'
@@ -36,13 +36,13 @@ def convert(message: telebot.types.Message):
             raise APIException('вы не ввели необходимые значения, как в образце. /help')
         else:
             quote, base, amount = values
-            total_base = CriptoConverter.convert(quote, base, amount)
+            total_base = CriptoConverter.get_price(quote, base, amount)
     except APIException as e:
         bot.reply_to(message, f'Я не смог сконвертировать, так как \n{e}')
     except Exception as e:
         bot.reply_to(message, f'Прошу прощения, не удалось обработать команду\n{e}')
     else:
-        text = f'{amount} {quote} составит {total_base} единиц в валюте {base}.'
+        text = f'{message.chat.first_name}, {amount} {quote} составит {total_base} единиц в валюте {base}.'
         bot.send_message(message.chat.id, text)
 
 

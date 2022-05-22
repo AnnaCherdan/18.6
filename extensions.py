@@ -9,7 +9,7 @@ class APIException(Exception):
 
 class CriptoConverter:
     @staticmethod
-    def convert(quote: str, base: str, amount: str):
+    def get_price(quote: str, base: str, amount: str):
         if quote == amount:
             raise APIException(f'название валюты надо вводить буквами, как в образце. /help')
         elif base == amount:
@@ -34,7 +34,7 @@ class CriptoConverter:
             if amount <= 0:
                 raise APIException(f'я отрицательные значения или ноль конвертировать не умею! /help')
         except ValueError:
-            raise APIException(f'"Количество" надо вводить в виде числового значения. /help')
+            raise APIException(f'"количество" надо вводить в виде числового значения. /help')
 
         r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
         total_base = json.loads(r.content)[keys[base]] * amount
