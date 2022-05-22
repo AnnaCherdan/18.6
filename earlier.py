@@ -63,4 +63,3 @@ def convert(message: telebot.types.Message):
 
 
 bot.polling(none_stop=True)
-№ 3, 5-25.
